@@ -1,4 +1,7 @@
 ﻿@page "/"
+@using Staffify.Database
+@using Staffify.Models.Data
+@inject Database database
 
 <PageTitle>Index</PageTitle>
 
@@ -6,4 +9,43 @@
 
 Welcome to your new app.
 
-<SurveyPrompt Title="How is Blazor working for you?" />
+@if (currentEmployees != null || currentEmployees.Count == 0)
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Employee ID</th>
+                <th>Name</th>
+                <th>Phone #</th>
+                <th>Email</th>
+                <th>Edit (TEMP)</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (Employee e in currentEmployees)
+            {
+                <tr>
+                    <td>@e.EmployeeId</td>
+                    <td>@e.Name</td>
+                    <td>@e.PhoneNumber</td>
+                    <td>@e.EmailAddress</td>
+                    <td>reeeee</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>Loading Employees...</p>
+}
+
+@code {
+    List<Employee>? currentEmployees = new();
+
+    protected override async Task OnInitializedAsync()
+    {
+        currentEmployees.Clear();
+        currentEmployees = database.GetEmployees();
+    }
+}
