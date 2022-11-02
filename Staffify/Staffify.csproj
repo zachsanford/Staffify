@@ -10,9 +10,4 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="6.0.10" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Data\" />
-    <Folder Include="Models\" />
-  </ItemGroup>
-
 </Project>
