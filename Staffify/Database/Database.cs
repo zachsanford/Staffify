@@ -59,4 +59,37 @@ public class Database : IDatabase
             return _employees;
         }
     }
+
+    public Employee GetSingleEmployee(int _employeeRecordId)
+    {
+        using (DatabaseContext _context = new())
+        {
+            Employee _employee = _context.Employees.Single(record => record.Id == _employeeRecordId);
+            return _employee;
+        }
+    }
+
+    public bool UpdateSingleEmployee(Employee _updatedEmployeeInformation)
+    {
+        using (DatabaseContext _context = new())
+        {
+            try
+            {
+                Employee _existingEmployee = _context.Employees.Single(record => record.Id == _updatedEmployeeInformation.Id);
+                _existingEmployee.EmployeeId = _updatedEmployeeInformation.Id;
+                _existingEmployee.Name = _updatedEmployeeInformation.Name;
+                _existingEmployee.PhoneNumber = _updatedEmployeeInformation.PhoneNumber;
+                _existingEmployee.EmailAddress = _updatedEmployeeInformation.EmailAddress;
+
+                _context.SaveChanges();
+
+                return true;
+            }
+            catch (Exception _ex)
+            {
+                // TODO
+                return false;
+            }
+        }
+    }
 }
