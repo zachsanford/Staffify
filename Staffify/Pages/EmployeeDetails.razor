@@ -1,0 +1,63 @@
+﻿@page "/employeedetails"
+@using Staffify.Database
+@using Staffify.Models.Data
+@inject Database database
+
+@if (employee != null)
+{
+    <h3>@employee.Name's Details</h3>
+    <hr />
+
+    <EditForm Model="@employee" OnValidSubmit="HandleValidSubmit">
+        <DataAnnotationsValidator />
+        <ValidationSummary />
+
+        <p>
+            <label>
+                Employee ID:
+                @employee.EmployeeId
+            </label>
+        </p>
+        <p>
+            <label>
+                Name:
+                <InputText @bind-Value="employee.Name" />
+            </label>
+        </p>
+        <p>
+            <label>
+                Phone Number:
+                <InputText @bind-Value="employee.PhoneNumber" />
+            </label>
+        </p>
+        <p>
+            <label>
+                Email Address:
+                <InputText @bind-Value="employee.EmailAddress" />
+            </label>
+        </p>
+        <p>
+            <button type="submit">Update</button>
+        </p>
+    </EditForm>
+}
+else
+{
+    <h3>LOADING EMPLOYEE</h3>
+
+    <p>Loading Employee...</p>
+}
+
+@code {
+    Employee? employee;
+
+    protected override async Task OnInitializedAsync()
+    {
+        employee = database.GetSingleEmployee(3); // TEST - Need to replace the number
+    }
+
+    private void HandleValidSubmit()
+    {
+        bool isUpdated = database.UpdateSingleEmployee(employee);
+    }
+}
