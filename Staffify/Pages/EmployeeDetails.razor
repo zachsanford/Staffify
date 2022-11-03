@@ -1,11 +1,14 @@
 ﻿@page "/employeedetails"
 @using Staffify.Database
 @using Staffify.Models.Data
+@using Staffify.Services
 @inject Database database
+@inject AppSingletonData employeeData
+@inject NavigationManager navigation
 
 @if (employee != null)
 {
-    <h3>@employee.Name's Details</h3>
+    <h3><span class="oi oi-person" aria-hidden="true"></span> @employee.Name's Details</h3>
     <hr />
 
     <EditForm Model="@employee" OnValidSubmit="HandleValidSubmit">
@@ -37,7 +40,8 @@
             </label>
         </p>
         <p>
-            <button type="submit">Update</button>
+            <button class="btn btn-primary" type="submit"><span class="oi oi-cloud-upload" aria-hidden="true"></span> Update</button>
+            <button class="btn btn-danger" @onclick="GoBack"><span class="oi oi-x" aria-hidden="true"></span> Cancel</button>
         </p>
     </EditForm>
 }
@@ -53,11 +57,16 @@ else
 
     protected override async Task OnInitializedAsync()
     {
-        employee = database.GetSingleEmployee(3); // TEST - Need to replace the number
+        employee = database.GetSingleEmployee(employeeData.Employee.Id);
     }
 
     private void HandleValidSubmit()
     {
         bool isUpdated = database.UpdateSingleEmployee(employee);
+    }
+
+    private void GoBack()
+    {
+        navigation.NavigateTo("/");
     }
 }
