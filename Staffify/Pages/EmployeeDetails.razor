@@ -6,44 +6,60 @@
 @inject AppSingletonData employeeData
 @inject NavigationManager navigation
 
+<PageTitle>@employeeData.Employee.Name Details</PageTitle>
+
 @if (employee != null)
 {
-    <h3><span class="oi oi-person" aria-hidden="true"></span> @employee.Name's Details</h3>
+    <h3><span class="oi oi-person" aria-hidden="true"></span> @employeeData.Employee.Name Details</h3>
     <hr />
 
-    <EditForm Model="@employee" OnValidSubmit="HandleValidSubmit">
-        <DataAnnotationsValidator />
-        <ValidationSummary />
+    <div class="parent">
+        <EditForm Model="@employee" OnValidSubmit="HandleValidSubmit">
+            <DataAnnotationsValidator />
+            <ValidationSummary />
 
-        <p>
-            <label>
-                Employee ID:
-                @employee.EmployeeId
-            </label>
-        </p>
-        <p>
-            <label>
-                Name:
-                <InputText @bind-Value="employee.Name" />
-            </label>
-        </p>
-        <p>
-            <label>
-                Phone Number:
-                <InputText @bind-Value="employee.PhoneNumber" />
-            </label>
-        </p>
-        <p>
-            <label>
-                Email Address:
-                <InputText @bind-Value="employee.EmailAddress" />
-            </label>
-        </p>
-        <p>
-            <button class="btn btn-primary" type="submit"><span class="oi oi-cloud-upload" aria-hidden="true"></span> Update</button>
-            <button class="btn btn-danger" @onclick="GoBack"><span class="oi oi-x" aria-hidden="true"></span> Cancel</button>
-        </p>
-    </EditForm>
+            <div class="column">
+                <div class="row">
+                    <p>
+                        <label>
+                            <b>Employee ID:</b>
+                            @employee.EmployeeId
+                        </label>
+                    </p>
+                </div>
+                <div class="row">
+                    <p>
+                        <label>
+                            <b>Phone Number:</b>
+                            <InputText class="textInput" @bind-Value="employee.PhoneNumber" />
+                        </label>
+                    </p>
+                </div>
+            </div>
+            <div class="column right">
+                <div class="row">
+                    <p>
+                        <label>
+                            <b>Name:</b>
+                            <InputText class="textInput" @bind-Value="employee.Name" />
+                        </label>
+                    </p>
+                </div>
+                <div class="row">
+                    <p>
+                        <label>
+                            <b>Email Address:</b>
+                            <InputText class="textInput" @bind-Value="employee.EmailAddress" />
+                        </label>
+                    </p>
+                </div>
+            </div>
+            <p>
+                <button class="btn btn-primary" type="submit"><span class="oi oi-cloud-upload" aria-hidden="true"></span> Update</button>
+                <button class="btn btn-danger" @onclick="GoBack"><span class="oi oi-x" aria-hidden="true"></span> Cancel</button>
+            </p>
+        </EditForm>
+    </div>
 }
 else
 {

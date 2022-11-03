@@ -7,6 +7,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Pages\EmployeeDetails.razor.css" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Pages\EmployeeDetails.razor.css" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="6.0.10" />
   </ItemGroup>
 
