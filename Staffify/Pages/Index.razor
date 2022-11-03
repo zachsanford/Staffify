@@ -1,7 +1,10 @@
 ﻿@page "/"
 @using Staffify.Database
 @using Staffify.Models.Data
+@using Staffify.Services
 @inject Database database
+@inject AppSingletonData employeeData
+@inject NavigationManager navigation
 
 <PageTitle>Index</PageTitle>
 
@@ -14,22 +17,22 @@ Welcome to your new app.
     <table class="table">
         <thead>
             <tr>
+                <th>Details</th>
                 <th>Employee ID</th>
                 <th>Name</th>
                 <th>Phone #</th>
                 <th>Email</th>
-                <th>Edit (TEMP)</th>
             </tr>
         </thead>
         <tbody>
             @foreach (Employee e in currentEmployees)
             {
                 <tr>
+                    <td><button class="btn btn-info" @onclick="@(() => GoToEmployeeDetailPage(e))"><span class="oi oi-pencil" aria-hidden="true"></span></button></td>
                     <td>@e.EmployeeId</td>
                     <td>@e.Name</td>
                     <td>@e.PhoneNumber</td>
                     <td>@e.EmailAddress</td>
-                    <td>reeeee</td>
                 </tr>
             }
         </tbody>
@@ -47,5 +50,11 @@ else
     {
         currentEmployees.Clear();
         currentEmployees = database.GetEmployees();
+    }
+
+    private void GoToEmployeeDetailPage(Employee _employeeRecord)
+    {
+        employeeData.Employee = _employeeRecord;
+        navigation.NavigateTo("/employeedetails");
     }
 }
