@@ -64,7 +64,14 @@
 
     @if (showModal)
     {
-        <Modal Title="Update Details" Body="The employee has been successfully updated" ButtonText="Close" Route="/" />
+        @if (isGoodUpdate)
+        {
+            <Modal Title="Update Details" Body="The employee has been successfully updated" ButtonText="Close" Route="/" />
+        }
+        else
+        {
+            <Modal Title="Update Details" Body="UNSUCCESSFUL UPDATE" ButtonText="Close" Route="/" />
+        }
     }
 }
 else
