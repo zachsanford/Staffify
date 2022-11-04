@@ -1,3 +1,5 @@
+# WRM Software Assessment
+
 <div style="display: inline;">
     <img alt="GitHub release (latest by date)" src="https://img.shields.io/github/v/release/zachsanford/WRM-Software-Assessment">
     <img alt="Platforms" src="https://img.shields.io/badge/Platforms-Windows-blue">
@@ -24,6 +26,6 @@ Download the latest .NET 6 SDK and install it. Afterward download this repositor
 
 This will start the webserver and open a web browser to the index page of Staffify. [^1]
 
-For a deeper look into the Staffify, please visit the :book: [Wiki](https://github.com/zachsanford/WRM-Software-Assessment/wiki).
+For a deeper look into the Staffify, please visit the :book: [Wiki](https://github.com/zachsanford/WRM-Software-Assessment/wiki/Wiki-Home).
 
 [^1]: Your web browser may issue a warning about the web page. Click on "Advanced" and then "Proceed to web page".
