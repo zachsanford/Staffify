@@ -5,7 +5,7 @@
 </div>
 <br />
 
-![Staffify-Main](assets/img/staffify-main.gif)
+![Staffify-Main](assets/img/Staffify-Main.gif)
 
 This repository features the project Staffify. Staffify is a web application used as a simple employee directory. This application satisfies the requirements on the assessment.
 
