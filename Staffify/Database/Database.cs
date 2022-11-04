@@ -87,7 +87,6 @@ public class Database : IDatabase
             }
             catch (Exception _ex)
             {
-                // TODO
                 return false;
             }
         }
