@@ -26,4 +26,4 @@ This will start the webserver and open a web browser to the index page of Staffi
 
 For a deeper look into the Staffify, please visit the :book: [Wiki](https://github.com/zachsanford/WRM-Software-Assessment/wiki).
 
-[^1]: Your web browsers may issue a warning about the web page. Click on "Advanced" and then "Proceed to web page".
+[^1]: Your web browser may issue a warning about the web page. Click on "Advanced" and then "Proceed to web page".
