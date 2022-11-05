@@ -18,7 +18,7 @@ To run this program you will need these items:
 | Item | Link | As of the Initial Release|
 | --- | --- | --- |
 | .NET 6 SDK | [Get the latest version](https://dotnet.microsoft.com/en-us/download/dotnet/6.0) | .NET SDK is on v6.0.402 |
-| This Repository | [Download](https://github.com/zachsanford/WRM-Software-Assessment/archive/refs/heads/main.zip) | v0.1.0 |
+| This Repository | [Download](https://github.com/zachsanford/WRM-Software-Assessment/archive/refs/heads/main.zip) | v0.1.1 |
 
 Download the latest .NET 6 SDK and install it. Afterward download this repository. Unzip the downloaded repository. Open a Terminal/PowerShell/Command Prompt and navigate to `~\Staffify\` and run the command `dotnet watch run`
 
