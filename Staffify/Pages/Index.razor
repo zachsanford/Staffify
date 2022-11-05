@@ -48,7 +48,7 @@ else
     protected override async Task OnInitializedAsync()
     {
         currentEmployees.Clear();
-        currentEmployees = database.GetEmployees();
+        currentEmployees = database.GetRecords();
     }
 
     private void GoToEmployeeDetailPage(Employee _employeeRecord)
