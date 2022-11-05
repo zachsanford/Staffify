@@ -1,4 +1,5 @@
 ﻿@page "/employeedetails"
+@using Serilog
 @using Staffify.Components
 @using Staffify.Database
 @using Staffify.Models.Data
@@ -88,17 +89,20 @@ else
 
     protected override async Task OnInitializedAsync()
     {
+        Log.Information("GET \"/employeedetails\"");
         employee = database.GetSingleRecord(employeeData.Employee.Id);
     }
 
     private void HandleValidSubmit()
     {
+        Log.Information("Form submitted");
         isGoodUpdate = database.UpdateSingleRecord(employee);
         showModal = true;
     }
 
     private void GoBack()
     {
+        Log.Information("Cancel form. Navigating back to \"/\"");
         navigation.NavigateTo("/");
     }
 }
