@@ -1,11 +1,7 @@
-﻿using Staffify.Models.Data;
+﻿namespace Staffify.Database;
 
-namespace Staffify.Database;
-
-public interface IDatabase
+public interface IDatabase<T>
 {
-    #region Employees Table
-
     /*
         Instructions only specify that the User Detail Page should "show the
         user's detail and give the ability to update fields", yet the images
@@ -18,17 +14,15 @@ public interface IDatabase
     */
 
     // Returns all of the Employees in the database
-    public List<Employee> GetEmployees();
+    public List<T> GetRecords();
 
     // Returns a single employee
-    public Employee GetSingleEmployee(int _employeeRecordId);
+    public T GetSingleRecord(int _x);
 
     /*
         UPDATE
     */
 
     // Updates an individual Employee
-    public bool UpdateSingleEmployee(Employee _updatedEmployeeInformation);
-
-    #endregion
+    public bool UpdateSingleRecord(T _t);
 }

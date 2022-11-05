@@ -2,7 +2,7 @@
 
 namespace Staffify.Database;
 
-public class Database : IDatabase
+public class Database : IDatabase<Employee>
 {
     // Constructor
     public Database()
@@ -51,7 +51,7 @@ public class Database : IDatabase
     }
 
     // Inherited Methods
-    public List<Employee> GetEmployees()
+    public List<Employee> GetRecords()
     {
         using (DatabaseContext _context = new())
         {
@@ -60,7 +60,7 @@ public class Database : IDatabase
         }
     }
 
-    public Employee GetSingleEmployee(int _employeeRecordId)
+    public Employee GetSingleRecord(int _employeeRecordId)
     {
         using (DatabaseContext _context = new())
         {
@@ -69,7 +69,7 @@ public class Database : IDatabase
         }
     }
 
-    public bool UpdateSingleEmployee(Employee _updatedEmployeeInformation)
+    public bool UpdateSingleRecord(Employee _updatedEmployeeInformation)
     {
         using (DatabaseContext _context = new())
         {

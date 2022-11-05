@@ -88,12 +88,12 @@ else
 
     protected override async Task OnInitializedAsync()
     {
-        employee = database.GetSingleEmployee(employeeData.Employee.Id);
+        employee = database.GetSingleRecord(employeeData.Employee.Id);
     }
 
     private void HandleValidSubmit()
     {
-        isGoodUpdate = database.UpdateSingleEmployee(employee);
+        isGoodUpdate = database.UpdateSingleRecord(employee);
         showModal = true;
     }
 
