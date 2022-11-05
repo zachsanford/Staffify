@@ -1,4 +1,5 @@
 ﻿@page "/"
+@using Serilog
 @using Staffify.Database
 @using Staffify.Models.Data
 @using Staffify.Services
@@ -47,6 +48,7 @@ else
 
     protected override async Task OnInitializedAsync()
     {
+        Log.Information("GET \"/\"");
         currentEmployees.Clear();
         currentEmployees = database.GetRecords();
     }
@@ -54,6 +56,7 @@ else
     private void GoToEmployeeDetailPage(Employee _employeeRecord)
     {
         employeeData.Employee = _employeeRecord;
+        Log.Information($"Passing StaffifyDB Employees table record to /employeedetails page. Record Id: {employeeData.Employee.Id}");
         navigation.NavigateTo("/employeedetails");
     }
 }
