@@ -4,6 +4,7 @@ namespace Staffify.Models.Data;
 public class Employee
 {
     public int Id { get; set; }
+    [Required]
     public int EmployeeId { get; set; }
     [Required]
     [StringLength(50, ErrorMessage = "Name is too long.")]

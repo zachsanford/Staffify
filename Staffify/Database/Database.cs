@@ -49,7 +49,7 @@ public class Database : IDatabase<Employee>
                     }
                 };
 
-                _context.AddRange(_employeesToAdd);
+                _context.Employees.AddRange(_employeesToAdd);
                 _context.SaveChanges();
                 Log.Information("Data added to the StaffifyDB Employees table.");
                 Log.Information("Closing database connection.");
@@ -58,15 +58,60 @@ public class Database : IDatabase<Employee>
     }
 
     // Inherited Methods
+    // TODO - Add exception handling to all API operations
+    public bool CreateRecord(Employee _employeeToCreate)
+    {
+        using (DatabaseContext _context = new())
+        {
+            try
+            {
+                Log.Information("Making database connection.");
+                _context.Employees.Add(_employeeToCreate);
+                _context.SaveChanges();
+                Log.Information("Successfully created new record in the StaffifyDB Employees table.");
+                Log.Information("Closing database connection.");
+                return true;
+            }
+            catch (Exception _ex)
+            {
+                Log.Error("Unsuccessful record creation in the StaffifyDB Employees table.");
+                Log.Error("ERROR MESSAGE");
+                Log.Error(_ex.ToString());
+                Log.Information("Closing database connection.");
+                return false;
+            }
+        }
+    }
+
     public List<Employee> GetRecords()
     {
         using (DatabaseContext _context = new())
         {
-            Log.Information("Making database connection.");
-            List<Employee> _employees = _context.Employees.ToList();
-            Log.Information("Returning all records from the StaffifyDB Employees table.");
-            Log.Information("Closing database connection.");
-            return _employees;
+            try
+            {
+                Log.Information("Making database connection.");
+                List<Employee> _employees = _context.Employees.ToList();
+                Log.Information("Returning all records from the StaffifyDB Employees table.");
+                Log.Information("Closing database connection.");
+                return _employees;
+            }
+            catch (Exception _ex)
+            {
+                Log.Error("Unsuccessful retrieval of records from the StaffifyDB Employees table.");
+                Log.Error("ERROR MESSAGE");
+                Log.Error(_ex.ToString());
+                Log.Information("Closing database connection.");
+                return new List<Employee>
+                {
+                    new Employee
+                    {
+                        EmployeeId = 999999,
+                        Name = "Database Error - Check Logs",
+                        PhoneNumber = "Database Error - Check Logs",
+                        EmailAddress = "Database Error - Check Logs"
+                    }
+                };
+            }
         }
     }
 
@@ -74,11 +119,28 @@ public class Database : IDatabase<Employee>
     {
         using (DatabaseContext _context = new())
         {
-            Log.Information("Making database connection.");
-            Employee _employee = _context.Employees.Single(record => record.Id == _employeeRecordId);
-            Log.Information($"Returning record from the StaffifyDB Employees table. Record Id: {_employeeRecordId}");
-            Log.Information("Closing database connection.");
-            return _employee;
+            try
+            {
+                Log.Information("Making database connection.");
+                Employee _employee = _context.Employees.Single(record => record.Id == _employeeRecordId);
+                Log.Information($"Returning record from the StaffifyDB Employees table. Record Id: {_employeeRecordId}");
+                Log.Information("Closing database connection.");
+                return _employee;
+            }
+            catch (Exception _ex)
+            {
+                Log.Error($"Unsuccessful retrieval of record from the StaffifyDB Employees table. Record Id: {_employeeRecordId}");
+                Log.Error("ERROR MESSAGE");
+                Log.Error(_ex.ToString());
+                Log.Information("Closing database connection.");
+                return new Employee
+                {
+                    EmployeeId = 999999,
+                    Name = "Database Error - Check Logs",
+                    PhoneNumber = "Database Error - Check Logs",
+                    EmailAddress = "Database Error - Check Logs"
+                };
+            }
         }
     }
 
@@ -90,7 +152,7 @@ public class Database : IDatabase<Employee>
             try
             {
                 Employee _existingEmployee = _context.Employees.Single(record => record.Id == _updatedEmployeeInformation.Id);
-                Log.Information($"Updating record in the Staffify Employees table. Record Id: {_updatedEmployeeInformation.Id}");
+                Log.Information($"Updating record in the StaffifyDB Employees table. Record Id: {_updatedEmployeeInformation.Id}");
                 _existingEmployee.EmployeeId = _updatedEmployeeInformation.Id;
                 _existingEmployee.Name = _updatedEmployeeInformation.Name;
                 _existingEmployee.PhoneNumber = _updatedEmployeeInformation.PhoneNumber;
@@ -104,9 +166,35 @@ public class Database : IDatabase<Employee>
             }
             catch (Exception _ex)
             {
-                Log.Error($"Unsuccessful update in the Staffify Employees table. Record Id: {_updatedEmployeeInformation.Id}");
+                Log.Error($"Unsuccessful update in the StaffifyDB Employees table. Record Id: {_updatedEmployeeInformation.Id}");
                 Log.Error("ERROR MESSAGE");
                 Log.Error(_ex.ToString());
+                Log.Information("Closing database connection.");
+                return false;
+            }
+        }
+    }
+
+    public bool DeleteRecord(int _recordToDelete)
+    {
+        using (DatabaseContext _context = new())
+        {
+            try
+            {
+                Log.Information("Making database connection.");
+                Employee _employeeToDelete = _context.Employees.Single(record => record.Id == _recordToDelete);
+                _context.Employees.Remove(_employeeToDelete);
+                _context.SaveChanges();
+                Log.Information($"Deleting record from the StaffifyDB Employees table. Record Id: {_employeeToDelete.Id}");
+                Log.Information("Closing database connection.");
+                return true;
+            }
+            catch (Exception _ex)
+            {
+                Log.Error($"Unsuccessful delete in the StaffifyDB Employees table. Record ID: {_recordToDelete}");
+                Log.Error("ERROR MESSAGE");
+                Log.Error(_ex.ToString());
+                Log.Information("Closing database connection");
                 return false;
             }
         }
