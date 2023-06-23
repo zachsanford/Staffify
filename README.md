@@ -1,4 +1,4 @@
-# WRM Software Assessment
+# Staffify Software Assessment
 
 <div style="display: inline;">
     <img alt="GitHub release (latest by date)" src="https://img.shields.io/github/v/release/zachsanford/WRM-Software-Assessment">
